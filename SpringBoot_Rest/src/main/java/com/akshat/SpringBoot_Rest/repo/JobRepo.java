@@ -28,6 +28,21 @@ public class JobRepo {
 	}
 
 	public JobPost getJob(int i) {
-		return jobs.get(i-1);
+		return jobs.get(i-1
+		);
+	}
+
+	public void updateJob(JobPost jobPost, int postId) {
+		for (int i = 0; i < jobs.size(); i++) {
+			JobPost job = jobs.get(i);
+			if (job.getPostId() == postId) {
+				jobs.set(i, jobPost);
+				return;
+			}
+		}
+	}
+
+	public void deleteJob(int postId) {
+		jobs.removeIf(t -> t.getPostId() == postId);
 	}
 }

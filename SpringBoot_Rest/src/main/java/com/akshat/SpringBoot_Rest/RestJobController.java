@@ -23,7 +23,8 @@ public class RestJobController {
     @Autowired
     private JobService service;
 
-    @GetMapping("jobPosts")
+    @GetMapping(path = "jobPosts", produces = "application/json")
+    //produces = "application/json" is used to specify the type of response that the method will return.
 //    @ResponseBody
     //The @ResponseBody annotation tells a controller that the object returned is automatically serialized into JSON and passed back into the HttpResponse object.
     public List<JobPost> getAllJobs() {
@@ -36,4 +37,22 @@ public class RestJobController {
         return service.getJob(postId);
     }
 
+    @PostMapping("jobPost")
+    public JobPost addJob(@RequestBody JobPost jobPost) {
+        //The @RequestBody annotation is used to bind the HTTP request/response body with a domain object in a method parameter or return type.
+        service.addJob(jobPost);
+        return service.getJob(jobPost.getPostId());
+    }
+
+    @PutMapping("jobPost/{postId}")
+    public JobPost updateJob(@RequestBody JobPost jobPost, @PathVariable int postId) {
+        service.updateJob(jobPost, postId);
+        return service.getJob(postId);
+    }
+
+    @DeleteMapping("jobPost/{postId}")
+    public String deleteJob(@PathVariable int postId) {
+        service.deleteJob(postId);
+        return "Job Post Deleted with ID: " + postId;
+    }
 }
