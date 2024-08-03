@@ -1,6 +1,10 @@
 package com.akshat.SpringBoot_Rest.model;
 
 import java.util.List;
+
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import org.springframework.stereotype.Component;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,20 +26,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Component
+@Entity
 public class JobPost {
 
-    /** The unique identifier for the job post. */
+    @Id
     private int postId;
-
-    /** The profile or title of the job post. */
     private String postProfile;
-
-    /** A brief description of the job post. */
     private String postDesc;
-
-    /** The required experience for the job post. */
     private Integer reqExperience;
-
-    /** The list of technologies required for the job post. */
+//    @ElementCollection
+    // ElementCollection is used to store multiple values in a single column of a table.
     private List<String> postTechStack;
 }

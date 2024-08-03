@@ -48,15 +48,26 @@ public class RestJobController {
         return service.getJob(jobPost.getPostId());
     }
 
-    @PutMapping("jobPost/{postId}")
-    public JobPost updateJob(@RequestBody JobPost jobPost, @PathVariable int postId) {
-        service.updateJob(jobPost, postId);
-        return service.getJob(postId);
+    @PutMapping("jobPost")
+    public JobPost updateJob(@RequestBody JobPost jobPost) {
+        service.updateJob(jobPost);
+        return service.getJob(jobPost.getPostId());
     }
 
     @DeleteMapping("jobPost/{postId}")
     public String deleteJob(@PathVariable int postId) {
         service.deleteJob(postId);
         return "Job Post Deleted with ID: " + postId;
+    }
+
+    @GetMapping("load")
+    public String load() {
+        service.load();
+        return "Data Loaded";
+    }
+
+    @GetMapping("jobPosts/keyword/{keyword}")
+    public List<JobPost> searchByKeyword(@PathVariable("keyword") String keyword) {
+        return service.searchByKeyword(keyword);
     }
 }
