@@ -54,6 +54,10 @@ public class RestJobController {
         return service.getJob(jobPost.getPostId());
     }
 
+    //The @DeleteMapping annotation is used to handle the HTTP DELETE requests in Spring Boot.
+    //It is used to map the HTTP DELETE requests onto specific handler methods.
+
+
     @DeleteMapping("jobPost/{postId}")
     public String deleteJob(@PathVariable int postId) {
         service.deleteJob(postId);
